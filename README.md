@@ -12,7 +12,18 @@ All test cases can be found here --> [Test Cases Google Drive Spreadsheet](https
 ```commandline 
 pip install -r requirements.txt
 ```
+```commandline 
+pip install -r requirements-dev.txt
+```
 3. Run the tests.
 ```commandline
 pytest -s -v test_cases/test_cases.py
+```
+
+### Black auto-formatter 
+Black Python Code Formatter has been used in this project.
+
+How to run it?
+```commandline
+black {source_file_or_directory}
 ```
