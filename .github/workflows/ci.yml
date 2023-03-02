@@ -1,15 +1,21 @@
-# run Black & run tests using pytest on push command
+# run Black, isort & run tests using pytest on push command
 
-name: Run black and tests
+name: Run black, isort and tests
 
 on: [push]
 
 jobs:
-  lint:
+  black:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: psf/black@stable
+
+  isort:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: isort/isort-action@v1.0.0
 
   test:
     runs-on: ubuntu-latest

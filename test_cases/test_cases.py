@@ -1,7 +1,8 @@
+import uuid
+
 from client_api.api_client import APIClient
 from expected_data.expected_data import ExpectedData
 from payloads.payloads import Payloads
-import uuid
 
 
 class TestAPI:
