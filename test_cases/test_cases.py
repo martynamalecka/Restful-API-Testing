@@ -1,5 +1,7 @@
 import uuid
 
+import pytest
+
 from client_api.api_client import APIClient
 from expected_data.expected_data import ExpectedData
 from payloads.payloads import Payloads
@@ -36,16 +38,17 @@ class TestAPI:
             expected_object_data == actual_object_data
         ), "The actual data for object with given id should match the expected data."
 
-    def test_get_objects_by_ids_200_expected(self):
+    @pytest.mark.parametrize("a", [3, 5, 10])
+    def test_get_objects_by_ids_200_expected(self, a):
         # get multiple objects by ids
-        get_objects_response = APIClient.get_multiple_objects_by_ids([3, 5, 10])
+        get_object_response = APIClient.get_single_object_by_id(a)
         assert (
-            get_objects_response.status_code == 200
+            get_object_response.status_code == 200
         ), "Objects with given ids NOT found."
 
         # check if the actual data of the objects matches the expected data
-        expected_objects_data = ExpectedData.get_object_with_id_3_5_10_data()
-        actual_objects_data = get_objects_response.json()
+        expected_objects_data = ExpectedData.get_all_objects_data()[a - 1]
+        actual_objects_data = get_object_response.json()
         assert (
             expected_objects_data == actual_objects_data
         ), "The actual data for objects with given ids should match the expected data."
